@@ -11,7 +11,10 @@ dotenv.config();
 connectDB();
 const app = express();
 const corsOptions = {
-     origin: "http://localhost:5173", // Allow your frontend running on localhost:5173
+     origin: [
+          "https://escort-beta.vercel.app", // Vercel origin
+          "http://localhost:5173"           // Local development origin
+        ], // Allow your frontend running on localhost:5173
      methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
      credentials: true, // Allow cookies to be sent along with requests
 };
@@ -30,7 +33,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // app.use('/uploads', express.static(path.join(__dirname, 'src', 'uploads')));
 app.get('/', (req, res) => {
-     res.send("Hello Escort");
+     res.send("Hello Escort for deploy");
 });
 app.use("/api/users", userroutes);
 app.use("/api/escorts", escortRoutes); // Use Escort routes
